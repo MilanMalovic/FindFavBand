@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
 
-</PreferenceScreen>
+    <header
+        android:fragment="com.example.ragaz.findfavoriteband.SettingsActivity$GeneralPreferenceFragment"
+        android:icon="@drawable/ic_stat_info"
+        android:title="General"/>
+
+    <header
+        android:fragment="com.example.ragaz.findfavoriteband.SettingsActivity$NotificationPreferenceFragment"
+        android:icon="@drawable/ic_stat_notify"
+        android:title="Notifications"/>
+
+    <header
+        android:fragment="com.example.ragaz.findfavoriteband.SettingsActivity$DataSyncPreferenceFragment"
+        android:icon="@drawable/ic_stat_sync"
+        android:title="Data &amp; Sync"/>
+
+
+</preference-headers>
