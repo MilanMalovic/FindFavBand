@@ -86,4 +86,7 @@
     <string name="dialog_about_no">Cancel</string>
 
     <string name="where_is_metallica">Where is Metallica</string>
+    <string name="about">About</string>
+    <string name="random_image">Random</string>
+    <string name="search">Search</string>
 </resources>

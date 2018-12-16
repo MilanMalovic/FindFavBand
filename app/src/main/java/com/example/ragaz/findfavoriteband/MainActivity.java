@@ -1,17 +1,23 @@
 package com.example.ragaz.findfavoriteband;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ragaz.findfavoriteband.Net.Model.Event;
 import com.example.ragaz.findfavoriteband.Net.MyService;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,17 +29,22 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    private AlertDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        Log.i("REZ","prvi0");
+            setContentView(R.layout.activity_main);
+           Log.i("REZ","prvi");
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        Log.i("REZ","2");
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         final EditText input = (EditText) findViewById(R.id.input_artist);
@@ -47,6 +58,38 @@ public class MainActivity extends AppCompatActivity {
         });
 
         return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.action_show_image:
+                showRandomImage();
+                break;
+            case R.id.action_about:
+                dialog = new AboutDialog(MainActivity.this).prepareDialog();
+                dialog.show();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showRandomImage() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.band_layout);
+
+        ImageView image = (ImageView) dialog.findViewById(R.id.band_image);
+
+        Picasso.with(this).load("https://source.unsplash.com/random").into(image);
+
+        dialog.show();
     }
 
 
