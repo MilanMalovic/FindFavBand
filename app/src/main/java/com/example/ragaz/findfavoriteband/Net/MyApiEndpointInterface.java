@@ -1,6 +1,7 @@
 package com.example.ragaz.findfavoriteband.Net;
 
 import com.example.ragaz.findfavoriteband.Net.Model.Event;
+import com.example.ragaz.findfavoriteband.Net.Model.Example;
 
 import java.util.List;
 import java.util.Map;
@@ -22,5 +23,7 @@ public interface MyApiEndpointInterface {
 
 
     @GET("artists/{artist}/events")
-    Call<List<Event>> getArtistByName(@Path("artist") String artist, @QueryMap Map<String, String> options);
+    Call<List<Example>> getArtistByName(@Path("artist") String artist, @QueryMap Map<String, String> options);
+
+
 }

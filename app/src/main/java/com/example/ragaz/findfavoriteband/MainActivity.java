@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ragaz.findfavoriteband.Net.Model.Event;
+import com.example.ragaz.findfavoriteband.Net.Model.Example;
 import com.example.ragaz.findfavoriteband.Net.MyService;
 import com.squareup.picasso.Picasso;
 
@@ -53,12 +54,15 @@ public class MainActivity extends AppCompatActivity {
         metallicaB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getArtistByName(input.getText().toString());
+                //getArtistByName(input.getText().toString() );
+                getExampleByName(input.getText().toString());
             }
         });
 
         return true;
     }
+
+
 
 
     @Override
@@ -92,8 +96,54 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    private void getExampleByName(String name) {
+        Map<String , String> query = new HashMap<String, String>();
+        query.put("app_id", "test");
 
-    private void getArtistByName(String name){
+        Call<List<Example>> call = MyService.apiInterface().getArtistByName(name, query);
+        call.enqueue(new Callback<List<Example>>() {
+                         @Override
+                         public void onResponse(Call<List<Example>> call, Response<List<Example>> response) {
+                             if (response.code() == 200) {
+                                 List<Example> exemple = response.body();
+                                 if (exemple.size() > 0) {
+                                     String[] data1 = new String[exemple.size()];
+                                     for (int i = 0; i < exemple.size(); i++) {
+                                         data1[i] = "Country: " +exemple.get(i).getVenue().getCountry()+ "\n" +" Name : " + exemple.get(i).getVenue().getName() + "\n" + " Date and Time : " +
+                                         exemple.get(i).getDatetime() + "\n" + " Lineup : " + exemple.get(i).getLineup() + " \n "
+                                         + "On Sale Date : " +exemple.get(i).getOnSaleDatetime() + "\n" + " Description : " + exemple.get(i).getDescription()  ;
+                                     }
+
+
+                                     Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                                     intent.putExtra("data", data1);
+                                     startActivity(intent);
+                                     Toast.makeText(MainActivity.this, "Prikaz liste koncerata", Toast.LENGTH_SHORT).show();
+                                 } else {
+                                     Toast.makeText(MainActivity.this, "Nema koncerata", Toast.LENGTH_SHORT).show();
+                                 }
+                             }
+                         }
+
+            @Override
+            public void onFailure(Call<List<Example>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+
+
+        });
+    }
+}
+
+
+
+
+
+
+
+
+  /* private void getArtistByName(String name){
         Map<String, String> query = new HashMap<String, String>();
         query.put("app_id", "test");
 
@@ -110,7 +160,10 @@ public class MainActivity extends AppCompatActivity {
                         String[] data = new String[events.size()];
 
                         for (int i = 0; i < events.size(); i++) {
-                            data[i] = events.get(i).getVenue().getName() + " : " + events.get(i).getDatetime();
+
+                            data[i] = events.get(i).getVenue().getName() + " : " + events.get(i).getDatetime()
+                            + " : " + events.get(i).getLineup() + " : " + events.get(i).getVenue().getCity()
+                                    + " : " + events.get(i).getVenue().getCountry();
                         }
 
                         Intent intent = new Intent(MainActivity.this, ResultActivity.class);
@@ -124,11 +177,13 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
+
+
             @Override
             public void onFailure(Call<List<Event>> call, Throwable t) {
                 //u slucaju da je nesto poslo po zlu, ispisemo sta nije u redu tj sta je poruka greske
                 Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
-}
+    }   */
+
