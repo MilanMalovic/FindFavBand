@@ -2,10 +2,10 @@ package com.example.ragaz.findfavoriteband;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.ragaz.findfavoriteband.Net.Model.Event;
 import com.example.ragaz.findfavoriteband.Net.Model.Example;
 import com.example.ragaz.findfavoriteband.Net.MyService;
 import com.squareup.picasso.Picasso;

@@ -6,6 +6,6 @@ package com.example.ragaz.findfavoriteband.Net;
  * */
 public class MyServiceContract {
 
-    public static final String BASE_URL = "https://rest.bandsintown.com/";
+        public static final String BASE_URL = "https://rest.bandsintown.com/";
 
 }
